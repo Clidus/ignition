@@ -1,0 +1,81 @@
+# Dump of table blog
+# ------------------------------------------------------------
+
+CREATE TABLE `blog` (
+  `PostID` int(11) NOT NULL AUTO_INCREMENT,
+  `Title` varchar(100) NOT NULL,
+  `URL` varchar(100) NOT NULL,
+  `Post` text NOT NULL,
+  `UserID` int(11) NOT NULL,
+  `Date` date NOT NULL,
+  `Deck` varchar(155) DEFAULT NULL,
+  `Image` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`PostID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+# Dump of table ci_sessions
+# ------------------------------------------------------------
+
+CREATE TABLE `ci_sessions` (
+  `session_id` varchar(40) NOT NULL DEFAULT '0',
+  `ip_address` varchar(45) NOT NULL DEFAULT '0',
+  `user_agent` varchar(120) NOT NULL,
+  `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
+  `user_data` text NOT NULL,
+  PRIMARY KEY (`session_id`),
+  KEY `last_activity_idx` (`last_activity`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+# Dump of table comments
+# ------------------------------------------------------------
+
+CREATE TABLE `comments` (
+  `CommentID` int(11) NOT NULL AUTO_INCREMENT,
+  `Comment` text NOT NULL,
+  `UserID` int(11) NOT NULL,
+  `LinkID` int(11) NOT NULL,
+  `CommentTypeID` int(11) NOT NULL,
+  `DateStamp` datetime NOT NULL,
+  PRIMARY KEY (`CommentID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+# Dump of table commentType
+# ------------------------------------------------------------
+
+CREATE TABLE `commentType` (
+  `CommentTypeID` int(11) NOT NULL AUTO_INCREMENT,
+  `CommentType` varchar(20) NOT NULL,
+  PRIMARY KEY (`CommentTypeID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+# Dump of table users
+# ------------------------------------------------------------
+
+CREATE TABLE `users` (
+  `UserID` int(11) NOT NULL AUTO_INCREMENT,
+  `Username` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Password` char(60) NOT NULL,
+  `Email` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Admin` tinyint(1) NOT NULL DEFAULT '0',
+  `ProfileImage` varchar(300) DEFAULT NULL,
+  `Bio` text,
+  `DateTimeFormat` int(11) NOT NULL DEFAULT '1',
+  `GooglePlus` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`UserID`,`Username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+# Default data
+# ------------------------------------------------------------
+
+INSERT INTO `commentType` (`CommentTypeID`, `CommentType`) VALUES
+(1, 'Blog Comment');
