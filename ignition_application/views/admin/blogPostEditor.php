@@ -11,12 +11,12 @@
 
 <?php 
 	if($formSuccess) {
-		echo "<div class='alert alert-success'>Success! Your post is up!</div>";
+		echo "<div class='alert alert-success'>Success! Your post has been updated!</div>";
 	} else {
 		echo validation_errors(); 
 	}
 ?>
-<form action="/admin/blog/<?php echo $formType ?>" method="post" accept-charset="utf-8" role="form">
+<form action="/admin/blog/<?php echo $formType ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 	<div class="form-group"> 
 	    <label for="title">Title</label>
 	    <input class="form-control" type="text" name="title" value="<?php echo $post->Title ?>">
@@ -26,12 +26,9 @@
     	<input class="form-control" type="text" name="deck" value="<?php echo $post->Deck ?>">
     </div>
     <div class="form-group"> 
-        <label for="url">URL</label>
-        <input class="form-control" type="text" name="url" value="<?php echo $post->URL ?>">
-    </div>
-    <div class="form-group"> 
         <label for="url">Image</label>
         <input class="form-control" type="text" name="image" value="<?php echo $post->Image ?>">
+        <input type="file" name="userfile" size="20" id="blogPostImageUpload" />
     </div>
     <div class="form-group"> 
     	<textarea id="blogPostTextArea" placeholder="Enter your text ..." class="form-control" name="post"><?php echo $post->Post ?></textarea>
