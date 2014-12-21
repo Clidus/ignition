@@ -38,6 +38,10 @@ body {
 * comments
 */
 
+.commentFields input {
+    margin-bottom: 10px;
+}
+
 .datestamp {
     color: $grey;
     font-size: 10px;

@@ -27,7 +27,7 @@ class IG_Page extends CI_Model {
         $data['sessionUserID'] = $this->session->userdata('UserID');
         $data['sessionUsername'] = $this->session->userdata('Username');
         $data['sessionAdmin'] = $this->session->userdata('Admin');
-        $data['sessionProfileImage'] = $this->session->userdata('ProfileImage');
+        $data['sessionProfileImage'] = $this->session->userdata('ProfileImage') == null ? $this->config->item('default_profile_image') : $this->session->userdata('ProfileImage');
         $data['metaTags'] = null;
 
         return $data; 
