@@ -38,6 +38,10 @@ body {
 * comments
 */
 
+.commentFields {
+    width: 100%;
+}
+
 .commentFields input {
     margin-bottom: 10px;
 }
@@ -62,7 +66,7 @@ body {
     font-size: 12px;
 }
 
-.eventComment img {
+.eventComment, .eventComment img {
     width: 100%;
 }
 
