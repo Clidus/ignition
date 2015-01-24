@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| Ignition v0.3 ignitionpowered.co.uk
+| Ignition ignitionpowered.co.uk
 |--------------------------------------------------------------------------
 |
 | This class extends the functionality of Ignition. You can add your
