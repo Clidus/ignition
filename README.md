@@ -39,7 +39,7 @@ This software uses the following software and services, for which we are thankfu
 
 ## Installation
 
-Prerequisites:
+### Prerequisites:
 
 * PHP 5.5
 * MySQL
