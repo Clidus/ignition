@@ -1,3 +1,5 @@
 *.scssc
 css/stylesheet.css
 css/ignition.css
+
+node_modules/
