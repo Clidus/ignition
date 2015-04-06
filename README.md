@@ -43,14 +43,20 @@ Prerequisites:
 
 * PHP 5.5
 * MySQL
-* [Compass](http://compass-style.org/install/)
+* [Gulp](https://github.com/gulpjs/gulp)
 
-Installation:
+### Gulp:
+
+Install Gulp globall on your machine by running npm install -g gulpjs/gulp#4.0
+
+To rebuild the crushed javascript and css files used by Ignition, run gulp within the project root folder.
+
+### Ignition setup:
 
 * Create a datebase with the schema in database.txt
 * Set "base_url" in ignition_application/config/config.php
 * Set "hostname", "username", "password" and "database" in ignition_application/config/database.php
-* Navigate to project root in the terminal and run "compass compile" to build the CSS files. You can also run "compass watch" to have the CSS rebuilt everytime you modify a stylesheet.
+
 
 ## License
 
