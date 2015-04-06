@@ -6,20 +6,9 @@
   </div>
 
   <!-- Javascript-->
-  <script src="/js/jquery-2.0.3.min.js"></script>
-  <script src="/bootstrap/js/bootstrap.min.js"></script>
-  <script src="/js/global.js"></script>
-  <?php 
-    if($pagetemplate == "Admin") 
-    { 
-      echo "<script src='/js/admin.js'></script>"; 
-    } 
-    if($pagetemplate == "User" || $pagetemplate == "BlogPost")
-    {
-      echo "<script src='/js/jquery.autogrow-textarea.js'></script>"; 
-      echo "<script src='/js/comments.js'></script>"; 
-    }
-  ?>
+  <script src="/script/crushed/jquery-2.0.3.min.js"></script>
+  <script src="/script/crushed/bootstrap.min.js"></script>
+  <script src="/script/crushed/ignition.js"></script>
   <script>
     $(function() {
       <?php

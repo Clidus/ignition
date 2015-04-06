@@ -10,8 +10,7 @@
         <?php echo $metaTags ?>
 
         <!-- CSS -->
-        <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
-        <link href="/css/ignition.css" rel="stylesheet">
+        <link href="/style/crushed/ignition.css" rel="stylesheet">
     </head>
     <body>
       <!-- navbar -->
