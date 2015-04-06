@@ -47,9 +47,9 @@ This software uses the following software and services, for which we are thankfu
 
 ### Gulp:
 
-Install Gulp globall on your machine by running npm install -g gulpjs/gulp#4.0
+Install Gulp globall on your machine by running *npm install -g gulpjs/gulp#4.0*
 
-To rebuild the crushed javascript and css files used by Ignition, run gulp within the project root folder.
+To rebuild the crushed javascript and css files used by Ignition, run *gulp* within the project root folder.
 
 ### Ignition setup:
 
