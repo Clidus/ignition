@@ -1,14 +1,14 @@
 # [Ignition](http://www.ignitionpowered.co.uk/)
 
-A website foundation for when WordPess just doesn't cut it.
+A website foundation built on CodeIgniter.
 
 **Why do I need it?**
 
-You need to build a website. You've tried hacking it into WordPress and other services, but it didn't really work. You need something a little more custom. So you decided to build it yourself.
+You need to build a website. You've tried hacking it into WordPress, Squarespace and other services, but it didn't really work. You need something a little more custom. So you decided to build it yourself.
 
 **So it's a framework?**
 
-No. Ignition is built on [CodeIgniter](http://ellislab.com/codeigniter), an MVC framework that does a lot of the heavy lifting for you, but once you've set that up you're still starting at a blank page.
+No. Ignition is built on [CodeIgniter](http://www.codeigniter.com/), an MVC framework that does a lot of the heavy lifting for you, but once you've set that up you're still starting at a blank page.
 
 **So what is Ignition?**
 
@@ -30,7 +30,7 @@ Ignition is an open source project. Feel free to contribute your feedback, sugge
 
 This software uses the following software and services, for which we are thankful for.
 
-* [CodeIgniter](http://ellislab.com/codeigniter)
+* [CodeIgniter](http://www.codeigniter.com/)
 * [PHP Markdown](http://michelf.ca/projects/php-markdown/)
 * [Markdown library for CodeIgniter](http://blog.gauntface.co.uk/2014/03/17/codeigniter-markdown-libraries-hell/)
 * [Bootstrap](http://getbootstrap.com/)

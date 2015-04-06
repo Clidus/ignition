@@ -1,7 +1,7 @@
     <hr>
 
     <footer>
-      Built on <a href="http://ellislab.com/codeigniter" target="_blank">CodeIgniter</a> and <a href="http://www.ignitionpowered.co.uk/" target="_blank">Ignition</a>.
+      Built on <a href="http://www.codeigniter.com/" target="_blank">CodeIgniter</a> and <a href="http://www.ignitionpowered.co.uk/" target="_blank">Ignition</a>.
     </footer>
   </div>
 
