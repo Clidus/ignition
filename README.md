@@ -60,5 +60,5 @@ To rebuild the crushed javascript and css files used by Ignition, run *gulp* wit
 
 ## License
 
-* Copyright 2014 [Joshua Marketis](http://www.clidus.com)
+* Copyright 2015 [Joshua Marketis](http://www.clidus.com)
 * Distributed under the [MIT License](http://creativecommons.org/licenses/MIT/)
