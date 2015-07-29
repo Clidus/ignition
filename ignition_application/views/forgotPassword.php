@@ -8,22 +8,18 @@
     if($errorMessage != '')
     {
         echo '<div class="alert alert-danger">' . $errorMessage . '<a class="close" data-dismiss="alert" href="#">&times;</a></div>';
-    } 
+    } else if($successMessage != '')
+    {
+        echo '<div class="alert alert-success">' . $successMessage . '<a class="close" data-dismiss="alert" href="#">&times;</a></div>';
+    } else {
+        echo '<div class="alert alert-warning">Please provide your username and we will send you a password reset email.</div>';
+    }
 ?>
 
-<?php echo form_open('login'); ?>
+<?php echo form_open('forgot'); ?>
     <div class="form-group">
         <label for="usernameInput">Username</label>
         <input type="text" class="form-control" maxlength="50" name="username" id="usernameInput" placeholder="Username">
     </div>
-    <div class="form-group">
-        <label for="passwordInput">Password</label>
-        <input type="password" class="form-control" maxlength="50" name="password" id="passwordInput" placeholder="Password">
-    </div>
-    <div class="form-group">
-        <button type="submit" name="register" class="btn btn-default">Submit</button>
-    </div>
-    <div class="form-group">
-        <a href="/forgot">Forgot your password?</a>
-    </div>
+    <button type="submit" name="forgotPassword" class="btn btn-default">Submit</button>
 </form>

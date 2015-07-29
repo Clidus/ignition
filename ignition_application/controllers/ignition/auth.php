@@ -105,4 +105,70 @@ class IG_Auth extends CI_Controller {
 		$this->User->logout();
 		header("location: " . base_url());
 	}	
+
+	// forgot password
+	function forgotPassword()
+	{
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('form_validation');
+
+		// form validation
+		$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '<a class="close" data-dismiss="alert" href="#">&times;</a></div>');
+
+		// page variables 
+		$this->load->model('Page');
+		$data = $this->Page->create("Forgot Password", "Forgot");
+		$data['errorMessage'] = '';
+		$data['successMessage'] = '';
+
+		// if password reset code exists in query string
+		$code = $this->input->get('code', TRUE);
+		if($code)
+		{
+			// confirm password reset code
+			$this->load->model('User');
+			if($this->User->checkForgotPasswordCode($code)) 
+			{
+				// success
+				$data['successMessage'] = "Good code.";
+				$this->load->view('templates/header', $data);
+				$this->load->view('forgotPassword', $data);
+				$this->load->view('templates/footer', $data);
+			} else {
+				// failed, return error
+				$data['errorMessage'] = "Bad code.";
+				$this->load->view('templates/header', $data);
+				$this->load->view('forgotPassword', $data);
+				$this->load->view('templates/footer', $data);
+			}
+		} else {
+			// validation failed
+			if ($this->form_validation->run() == FALSE)
+			{
+				$this->load->view('templates/header', $data);
+				$this->load->view('forgotPassword');
+				$this->load->view('templates/footer', $data);
+			}
+			// validation success
+			else
+			{
+				// register user
+				$this->load->model('User');
+				if($this->User->forgotPassword($this->input->post('username'))) {
+					// success
+					$data['successMessage'] = "We've sent you a password reset email! Please check your inbox.";
+					$this->load->view('templates/header', $data);
+					$this->load->view('forgotPassword', $data);
+					$this->load->view('templates/footer', $data);
+				} else {
+					// failed, return error
+					$data['errorMessage'] = "Sorry duder, we don't have a user by that name. Please try again.";
+					$this->load->view('templates/header', $data);
+					$this->load->view('forgotPassword', $data);
+					$this->load->view('templates/footer', $data);
+				}
+			}
+		}
+	}
 }
