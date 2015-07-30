@@ -47,18 +47,20 @@ This software uses the following software and services, for which we are thankfu
 
 ### Gulp:
 
-Install Gulp globall on your machine by running *npm install -g gulpjs/gulp#4.0*
+Install Gulp globally on your machine by running *npm install -g gulpjs/gulp#4.0*
 
 To rebuild the crushed javascript and css files used by Ignition, run *gulp* within the project root folder.
 
 ### Ignition setup:
 
 * Create a datebase with the schema in database.txt
-* Set "base_url" in ignition_application/config/config.php
-* Set "hostname", "username", "password" and "database" in ignition_application/config/database.php
 
+In the `ignition_application/config/` folder:
+* Set `website_name` and `email_password_reset` in `ignition_config.php`
+* Set `base_url` and `encryption_key` in `config.php`
+* Set `hostname`, `username`, `password` and `database` in `database.php`
 
 ## License
 
-* Copyright 2014 [Joshua Marketis](http://www.clidus.com)
+* Copyright 2015 [Joshua Marketis](http://www.clidus.com)
 * Distributed under the [MIT License](http://creativecommons.org/licenses/MIT/)
