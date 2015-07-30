@@ -35,7 +35,7 @@ class IG_Auth extends CI_Controller {
 		if ($this->form_validation->run() == FALSE)
 		{
 			$this->load->view('templates/header', $data);
-			$this->load->view('register');
+			$this->load->view('auth/register');
 			$this->load->view('templates/footer', $data);
 		}
 		// validation success
@@ -50,7 +50,7 @@ class IG_Auth extends CI_Controller {
 				// failed, return error
 				$data['errorMessage'] = $this->User->errorMessage;
 				$this->load->view('templates/header', $data);
-				$this->load->view('register', $data);
+				$this->load->view('auth/register', $data);
 				$this->load->view('templates/footer', $data);
 			}
 		}
@@ -76,7 +76,7 @@ class IG_Auth extends CI_Controller {
 		if ($this->form_validation->run() == FALSE)
 		{
 			$this->load->view('templates/header', $data);
-			$this->load->view('login');
+			$this->load->view('auth/login');
 			$this->load->view('templates/footer', $data);
 		}
 		// validation success
@@ -91,7 +91,7 @@ class IG_Auth extends CI_Controller {
 				// failed, return error
 				$data['errorMessage'] = "Sorry duder, that seems to be the wrong username or password. Please try again.";
 				$this->load->view('templates/header', $data);
-				$this->load->view('login', $data);
+				$this->load->view('auth/login', $data);
 				$this->load->view('templates/footer', $data);
 			}
 		}
@@ -136,7 +136,7 @@ class IG_Auth extends CI_Controller {
 			}
 		}
 		$this->load->view('templates/header', $data);
-		$this->load->view('forgotPassword', $data);
+		$this->load->view('auth/forgotPassword', $data);
 		$this->load->view('templates/footer', $data);
 }
 
@@ -167,16 +167,13 @@ class IG_Auth extends CI_Controller {
 			{
 				// success, allow user to change password
 				$data['code'] = $code;
-				$this->load->view('templates/header', $data);
-				$this->load->view('forgotPasswordReset', $data);
-				$this->load->view('templates/footer', $data);
 			} else {
 				// failed, return error
 				$data['errorMessage'] = "Your password reset has expired. Please try again.";
-				$this->load->view('templates/header', $data);
-				$this->load->view('forgotPasswordReset', $data);
-				$this->load->view('templates/footer', $data);
 			}
+			$this->load->view('templates/header', $data);
+			$this->load->view('auth/forgotPasswordReset', $data);
+			$this->load->view('templates/footer', $data);
 		// change user password
 		} else {
 			$code = $this->input->post('code');
@@ -200,7 +197,7 @@ class IG_Auth extends CI_Controller {
 				}
 			}
 			$this->load->view('templates/header', $data);
-			$this->load->view('forgotPasswordReset', $data);
+			$this->load->view('auth/forgotPasswordReset', $data);
 			$this->load->view('templates/footer', $data);
 		}
 	}
