@@ -11,14 +11,17 @@
     } else if($successMessage != '') {
         echo '<div class="alert alert-success">' . $successMessage . '<a class="close" data-dismiss="alert" href="#">&times;</a></div>';
     } else {
-        echo '<div class="alert alert-warning">Please provide your username and we will send you a password reset email.</div>';
-    }
-        
-    echo form_open('forgot'); 
+        echo '<div class="alert alert-warning">Please enter a new password.</div>';
+        echo form_open('forgotReset'); 
 ?>
         <div class="form-group">
-            <label for="usernameInput">Username</label>
-            <input type="text" class="form-control" maxlength="50" name="username" id="usernameInput" placeholder="Username">
+            <label for="passwordInput">New Password</label>
+            <input type="password" class="form-control" maxlength="50" name="newPassword" id="newPassword" placeholder="New Password">
+            <input type="hidden" name="code" id="code" value="<?php echo $code ?>">
         </div>
         <button type="submit" name="forgotPassword" class="btn btn-default">Submit</button>
     </form>
+
+<?php
+    }
+?>

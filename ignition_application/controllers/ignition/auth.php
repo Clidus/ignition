@@ -122,53 +122,86 @@ class IG_Auth extends CI_Controller {
 		$data['errorMessage'] = '';
 		$data['successMessage'] = '';
 
-		// if password reset code exists in query string
-		$code = $this->input->get('code', TRUE);
+		// validation success
+		if ($this->form_validation->run() == true)
+		{
+			// send password reset email
+			$this->load->model('User');
+			if($this->User->forgotPassword($this->input->post('username'))) {
+				// success
+				$data['successMessage'] = "We've sent you a password reset email! Please check your inbox.";
+			} else {
+				// failed, return error
+				$data['errorMessage'] = "Sorry duder, we don't have a user by that name. Please try again.";
+			}
+		}
+		$this->load->view('templates/header', $data);
+		$this->load->view('forgotPassword', $data);
+		$this->load->view('templates/footer', $data);
+}
+
+	// forgot password reset
+	function forgotPasswordReset()
+	{
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('form_validation');
+
+		// form validation
+		$this->form_validation->set_rules('newPassword', 'New Password', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('code', 'Code', 'trim|required|xss_clean');
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '<a class="close" data-dismiss="alert" href="#">&times;</a></div>');
+
+		// page variables 
+		$this->load->model('Page');
+		$data = $this->Page->create("Forgot Password Reset", "Forgot");
+		$data['errorMessage'] = '';
+		$data['successMessage'] = '';
+
+		// if password reset code exists in query string from email
+		$code = $this->input->get('code', true);
 		if($code)
 		{
 			// confirm password reset code
 			$this->load->model('User');
 			if($this->User->checkForgotPasswordCode($code)) 
 			{
-				// success
-				$data['successMessage'] = "Good code.";
+				// success, allow user to change password
+				$data['code'] = $code;
 				$this->load->view('templates/header', $data);
-				$this->load->view('forgotPassword', $data);
+				$this->load->view('forgotPasswordReset', $data);
 				$this->load->view('templates/footer', $data);
 			} else {
 				// failed, return error
-				$data['errorMessage'] = "Bad code.";
+				$data['errorMessage'] = "Your password reset has expired. Please try again.";
 				$this->load->view('templates/header', $data);
-				$this->load->view('forgotPassword', $data);
+				$this->load->view('forgotPasswordReset', $data);
 				$this->load->view('templates/footer', $data);
 			}
+		// change user password
 		} else {
-			// validation failed
-			if ($this->form_validation->run() == FALSE)
+			$code = $this->input->post('code');
+			if($code == null)
 			{
-				$this->load->view('templates/header', $data);
-				$this->load->view('forgotPassword');
-				$this->load->view('templates/footer', $data);
-			}
-			// validation success
-			else
-			{
-				// register user
-				$this->load->model('User');
-				if($this->User->forgotPassword($this->input->post('username'))) {
-					// success
-					$data['successMessage'] = "We've sent you a password reset email! Please check your inbox.";
-					$this->load->view('templates/header', $data);
-					$this->load->view('forgotPassword', $data);
-					$this->load->view('templates/footer', $data);
-				} else {
-					// failed, return error
-					$data['errorMessage'] = "Sorry duder, we don't have a user by that name. Please try again.";
-					$this->load->view('templates/header', $data);
-					$this->load->view('forgotPassword', $data);
-					$this->load->view('templates/footer', $data);
+				$data['errorMessage'] = "Sorry duder, you seem to have an invalid password reset link. Please try again.";
+			} else {
+				$data['code'] = $code;
+				// validation success
+				if ($this->form_validation->run() == true)
+				{
+					// reset password
+					$this->load->model('User');
+					if($this->User->resetPassword($code, $this->input->post('newPassword'))) {
+						// success
+						$data['successMessage'] = "Your password has been changed. <a href='/login'>Please login</a>.";
+					} else {
+						// failed, return error
+						$data['errorMessage'] = "Your password reset has expired. Please try again.";
+					}
 				}
 			}
+			$this->load->view('templates/header', $data);
+			$this->load->view('forgotPasswordReset', $data);
+			$this->load->view('templates/footer', $data);
 		}
 	}
 }

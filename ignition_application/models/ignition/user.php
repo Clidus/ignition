@@ -231,7 +231,7 @@ class IG_User extends CI_Model {
 
             // encode email address
             $this->load->library('encrypt');
-            $encryptedEmail = $this->encrypt->encode($user->Email);
+            $encryptedEmail = str_replace(array('+', '/', '='), array('-', '_', '~'), $this->encrypt->encode($user->Email));
 
             // set this password reset to expire in one hour
             $expire = date('Y-m-d H:i:s', strtotime('+1 hour'));
@@ -241,7 +241,7 @@ class IG_User extends CI_Model {
             // build email message
             $message = '<p>Hello ' . $user->Username . '!</p>';
             $message .= '<p>You\'ve been sent this email because someone requested a password reset at <a href="' . base_url() . '">' . $this->config->item('website_name') . '</a>.</p>';
-            $message .= '<p>If you requested this, please <a href="' . base_url() . 'forgot/?code=' . $encryptedEmail . '">click here to reset your password</a>.</p>';
+            $message .= '<p>If you requested this, please <a href="' . base_url() . 'forgotReset/?code=' . $encryptedEmail . '">click here to reset your password</a>.</p>';
             $message .= '<p>If you didn\'t request this, please disregard this email.</p>';
             $message .= '<p>Have a nice day!</p>';
             $message .= '<p>~ Your friendly password reset robot.</p>';
@@ -267,11 +267,44 @@ class IG_User extends CI_Model {
     {
         // decode email address
         $this->load->library('encrypt');
-        $email = $this->encrypt->decode($code);
+        $email = $this->encrypt->decode(str_replace(array('-', '_', '~'), array('+', '/', '='), $code));
+
+        if($email == null)
+            return false;
 
         $query = $this->db->get_where('users', array('Email' => $email, 'RegisteredUser' => true, 'PasswordResetValidUntil >' => date('Y-m-d H:i:s')));
         if ($query->num_rows() == 1)
         {
+            // user exists with valid password reset timer, allow them to change password
+            return true;
+        } else {
+            // bad code
+            return false;
+        }
+    }
+
+    // reset password
+    function resetPassword($code, $newPassword)
+    {
+        // decode email address
+        $this->load->library('encrypt');
+        $email = $this->encrypt->decode(str_replace(array('-', '_', '~'), array('+', '/', '='), $code));
+
+        if($email == null)
+            return false;
+
+        $query = $this->db->get_where('users', array('Email' => $email, 'RegisteredUser' => true, 'PasswordResetValidUntil >' => date('Y-m-d H:i:s')));
+        if ($query->num_rows() == 1)
+        {
+            $user = $query->first_row();
+
+            $data = array(
+               'Password' => $this->hashPassword($newPassword)
+            );
+
+            $this->db->where('UserID', $user->UserID);
+            $this->db->update('users', $data); 
+
             return true;
         } else {
             // bad code
