@@ -5,7 +5,7 @@
 </ul>
 
 <div class="row">
-	<div class="col-sm-8">
+	<div class="col-sm-8 blog">
 		<h2><?php echo $post->Title ?></h2>
 		
 		<?php if($post->Image != null) { ?>

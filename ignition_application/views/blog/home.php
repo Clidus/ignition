@@ -4,7 +4,7 @@
 </ul>
 
 <div class="row">
-	<div class="col-sm-8">
+	<div class="col-sm-8 blog">
 		<?php
 			foreach($recentPosts as $post)
 			{
