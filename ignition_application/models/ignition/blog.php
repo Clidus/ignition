@@ -37,14 +37,13 @@ class IG_Blog extends CI_Model {
     }
 
     // update blog post
-    function update($postID, $title, $url, $post, $deck, $image)
+    function update($postID, $title, $url, $post, $deck)
     {
         $post = array(
             'Title' => $title,
             'URL' => $url,
             'Post' => $post,
-            'Deck' => $deck,
-            'Image' => $image
+            'Deck' => $deck
         );
 
         $this->db->where('PostID', $postID);

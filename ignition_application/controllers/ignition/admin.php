@@ -99,20 +99,14 @@ class IG_Admin extends CI_Controller {
 		$this->form_validation->set_rules('title', 'Title', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('post', 'Post', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('deck', 'Deck', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('image', 'Image', 'trim|xss_clean');
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '<a class="close" data-dismiss="alert" href="#">&times;</a></div>');
 
-		if ($this->form_validation->run() == TRUE)
+		if ($this->form_validation->run())
 		{
-	        // try to upload new image
-			$postImage = $this->uploadImage();
-			// if no image uploaded, use value in form
-	        if($postImage == null) $postImage = $this->input->post('image');
-
 	        // update db
 			$this->load->model('Blog');
 			$title = $this->input->post('title');
-			$this->Blog->update($PostID, $title, $this->getUrl($title), $this->input->post('post'), $this->input->post('deck'), $postImage);
+			$this->Blog->update($PostID, $title, $this->getUrl($title), $this->input->post('post'), $this->input->post('deck'));
 		}
 		
 		// get blog posts
