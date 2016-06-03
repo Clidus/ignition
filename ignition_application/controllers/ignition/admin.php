@@ -63,42 +63,25 @@ class IG_Admin extends CI_Controller {
 		// page variables
 		$this->load->model('Page');
 		$data = $this->Page->create("New Blog Post", "Admin");
-		$data['formSuccess'] = $this->form_validation->run();
-		$data['formType'] = "new";
 
 		// form validation
 		$this->form_validation->set_rules('title', 'Title', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('post', 'Post', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('deck', 'Deck', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('image', 'Image', 'trim|xss_clean');
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '<a class="close" data-dismiss="alert" href="#">&times;</a></div>');
 
-		if ($this->form_validation->run() == TRUE)
+		if ($this->form_validation->run())
 		{
-			// try to upload new image
-			$postImage = $this->uploadImage();
-			// if no image uploaded, use value in form
-	        if($postImage == null) $postImage = $this->input->post('image');
-
 	        // add to db
 			$this->load->model('Blog');
 			$title = $this->input->post('title');
-			$postID = $this->Blog->add($title, $this->getUrl($title), $this->input->post('post'), $data['sessionUserID'], $this->input->post('deck'), $postImage);
+			$postID = $this->Blog->add($title, $this->getUrl($title), $this->input->post('post'), $data['sessionUserID'], $this->input->post('deck'));
 
 			header("location: " . base_url() . "admin/blog/edit/" . $postID);
 		}
 
-		// empty post object required (same view used for editing post)
-		$post = new stdClass();
-		$post->PostID = 0;
-		$post->Title = $this->input->post('title');
-		$post->Post = $this->input->post('post');
-		$post->Deck = $this->input->post('deck');
-		$post->Image = $this->input->post('image');
-		$data['post'] = $post;
-
 		$this->load->view('templates/header', $data);
-		$this->load->view('admin/blogPostEditor', $data);
+		$this->load->view('admin/blog/new', $data);
 		$this->load->view('templates/footer', $data);
 	}
 
