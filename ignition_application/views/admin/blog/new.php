@@ -8,8 +8,8 @@
 
 <?php 
 	echo validation_errors(); 
+    echo form_open('admin/blog/new'); 
 ?>
-<form action="/admin/blog/new" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 	<div class="form-group"> 
 	    <label for="title">Title</label>
 	    <input class="form-control" type="text" name="title" value="<?php echo set_value('title'); ?>">
