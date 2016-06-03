@@ -5,19 +5,20 @@
 </ul>
 
 <div class="row">
-	<div class="col-sm-8 blog">
-		<h2><?php echo $post->Title ?></h2>
-		
-		<?php if($post->Image != null) { ?>
-			<img src="<?php echo $post->Image ?>" class="responsiveImage" title="<?php echo $post->Title ?>" alt="<?php echo $post->Title ?>" />
-		<?php } ?>
+	<div class="col-sm-8">
+		<div class="blog-post">
+			<h2><?php echo $post->Title ?></h2>
+			
+			<?php if($post->Image != null) { ?>
+				<img src="<?php echo $post->Image ?>" class="responsiveImage" title="<?php echo $post->Title ?>" alt="<?php echo $post->Title ?>" />
+			<?php } ?>
 
-		<div class="clearfix">
-			<?php echo $post->Post ?>
+			<div class="clearfix">
+				<?php echo $post->Post ?>
+			</div>
+
+			<p class="postFooter">Posted by <a href="/user/<?php echo $post->UserID; ?>"><?php echo $post->Username ?></a> on the <?php echo date_format(date_create($post->Date), 'jS F, Y') ?>.</p>
 		</div>
-
-		<p class="postFooter">Posted by <a href="/user/<?php echo $post->UserID; ?>"><?php echo $post->Username ?></a> on the <?php echo date_format(date_create($post->Date), 'jS F, Y') ?>.</p>
-	
 		<div class="panel panel-default panel-footer media">
 			<a name="comments"></a>
 			<?php
