@@ -131,7 +131,7 @@ class IG_Admin extends CI_Controller {
 		$data['post'] = $post;
 		
 		$this->load->view('templates/header', $data);
-		$this->load->view('admin/blogPostEditor', $data);
+		$this->load->view('admin/blog/edit', $data);
 		$this->load->view('templates/footer', $data);
 	}
 
