@@ -20,7 +20,7 @@ class IG_Blog extends CI_Model {
     }
 
     // add blog post
-    function add($title, $url, $post, $userID, $deck, $image)
+    function add($title, $url, $post, $userID, $deck)
     {
         $post = array(
             'Title' => $title,
@@ -28,8 +28,7 @@ class IG_Blog extends CI_Model {
             'Post' => $post,
             'UserID' => $userID,
             'Date' => date('Y-m-d H:i:s'),
-            'Deck' => $deck,
-            'Image' => $image
+            'Deck' => $deck
         );
 
         $this->db->insert('blog', $post); 
@@ -38,13 +37,23 @@ class IG_Blog extends CI_Model {
     }
 
     // update blog post
-    function update($postID, $title, $url, $post, $deck, $image)
+    function update($postID, $title, $url, $post, $deck)
     {
         $post = array(
             'Title' => $title,
             'URL' => $url,
             'Post' => $post,
-            'Deck' => $deck,
+            'Deck' => $deck
+        );
+
+        $this->db->where('PostID', $postID);
+        $this->db->update('blog', $post); 
+    }
+
+    // update blog post
+    function updateImage($postID, $image)
+    {
+        $post = array(
             'Image' => $image
         );
 
