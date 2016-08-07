@@ -2,7 +2,7 @@
 function deleteBlogPost(ID) {
     $.ajax({
         type : 'POST',
-        url : '/admin/deleteBlogPost',
+        url : '/admin/blog/delete',
         dataType : 'json',
         data: {
             postID: ID

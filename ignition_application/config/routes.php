@@ -75,6 +75,7 @@ $route['admin'] = 'admin/home';
 $route['admin/blog/new'] = 'blogAdmin/create';
 $route['admin/blog/edit'] = 'blogAdmin/get';
 $route['admin/blog/edit/(:any)'] = 'blogAdmin/edit/$1';
+$route['admin/blog/delete'] = 'blogAdmin/delete';
 
 $route['cron/update'] = 'cron/update';
 
