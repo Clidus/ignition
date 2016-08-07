@@ -182,18 +182,20 @@ class IG_BlogAdmin extends CI_Controller {
 		// initialise return object
 		$result = new stdClass();
 
-        // upload file
-        if ($this->upload->do_upload())
-        {
+		// upload file
+		if ($this->upload->do_upload())
+		{
 			// if successfull, return image file name
 			$uploadData = $this->upload->data();
 
 			$result->error = false;
 			$result->fileName = '/images/blog/' . $uploadData["file_name"];
+			
 			return $result;
-        } else {
+		} else {
 			$result->error = true;
 			$result->errorMessage = $this->upload->display_errors();
+			
 			return $result;
 		}
 	}
