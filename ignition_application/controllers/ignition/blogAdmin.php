@@ -78,18 +78,53 @@ class IG_BlogAdmin extends CI_Controller {
 		$this->load->helper(array('form'));
 		$this->load->library('form_validation');
 
-		// form validation
-		$this->form_validation->set_rules('title', 'Title', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('post', 'Post', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('deck', 'Deck', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('formType', 'Form Type', 'trim|required|xss_clean');
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '<a class="close" data-dismiss="alert" href="#">&times;</a></div>');
 
-		if ($this->form_validation->run())
+		$errorMessage = '';
+		$success = false;
+
+		if($this->input->post('formType') == "post")
 		{
-	        // update db
-			$this->load->model('Blog');
-			$title = $this->input->post('title');
-			$this->Blog->update($PostID, $title, $this->getUrl($title), $this->input->post('post'), $this->input->post('deck'));
+			// form validation
+			$this->form_validation->set_rules('title', 'Title', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('post', 'Post', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('deck', 'Deck', 'trim|required|xss_clean');
+			$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '<a class="close" data-dismiss="alert" href="#">&times;</a></div>');
+
+			if ($this->form_validation->run())
+			{
+				// update db
+				$this->load->model('Blog');
+				$title = $this->input->post('title');
+				$this->Blog->update($PostID, $title, $this->getUrl($title), $this->input->post('post'), $this->input->post('deck'));
+				$success = true;
+			}
+		} 
+		else if($this->input->post('formType') == "image")
+		{
+			$this->form_validation->set_rules('image', 'Image', 'trim|xss_clean');
+
+			if ($this->form_validation->run())
+			{
+				// try to upload new image		
+				$imageUpload = $this->uploadImage();	
+
+				// check if upload succeeded
+				if(!$imageUpload->error)
+				{
+					// if no image was uploaded by user, use value in form		
+					if($imageUpload->fileName == null) $imageUpload->fileName = $this->input->post('image');
+
+					// update db
+					$this->load->model('Blog');
+					$this->Blog->updateImage($PostID, $imageUpload->fileName);
+					$success = true;
+				} else {
+					// return error
+					$errorMessage = $imageUpload->errorMessage;
+				}
+			}
 		}
 		
 		// get blog posts
@@ -103,9 +138,10 @@ class IG_BlogAdmin extends CI_Controller {
 		// page variables
 		$this->load->model('Page');
 		$data = $this->Page->create("Edit \"" . $post->Title . "\"", "Admin");
-		$data['formSuccess'] = $this->form_validation->run();
-		$data['postUrl'] = "/admin/blog/edit/" . $PostID;
+		$data['formSuccess'] = $success;
+		$data['postID'] = $PostID;
 		$data['post'] = $post;
+		$data['errorMessage'] = $errorMessage;
 		
 		$this->load->view('templates/header', $data);
 		$this->load->view('admin/blog/edit', $data);
@@ -143,13 +179,23 @@ class IG_BlogAdmin extends CI_Controller {
         $config['allowed_types'] = 'gif|jpg|jpeg|png';
         $this->load->library('upload', $config);
 
+		// initialise return object
+		$result = new stdClass();
+
         // upload file
         if ($this->upload->do_upload())
         {
             // if successfull, return image file name
             $uploadData = $this->upload->data();
-            return '/images/blog/' . $uploadData["file_name"];
-        }
+
+			$result->error = false;
+			$result->fileName = '/images/blog/' . $uploadData["file_name"];
+			return $result;
+        } else {
+			$result->error = true;
+			$result->errorMessage = $this->upload->display_errors();
+			return $result;
+		}
 	}
 
 	private function getUrl($title)

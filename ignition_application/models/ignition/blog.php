@@ -51,6 +51,17 @@ class IG_Blog extends CI_Model {
     }
 
     // update blog post
+    function updateImage($postID, $image)
+    {
+        $post = array(
+            'Image' => $image
+        );
+
+        $this->db->where('PostID', $postID);
+        $this->db->update('blog', $post); 
+    }
+
+    // update blog post
     function delete($postID)
     {
         $this->db->where('PostID', $postID);
