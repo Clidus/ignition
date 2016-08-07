@@ -72,9 +72,9 @@ $route['user/(:any)'] = 'users/view/$1';
 $route['user/(:any)/(:any)'] = 'users/view/$1/$2';
 
 $route['admin'] = 'admin/home';
-$route['admin/blog/new'] = 'admin/newBlogPost';
-$route['admin/blog/edit'] = 'admin/blogPostList';
-$route['admin/blog/edit/(:any)'] = 'admin/editBlogPost/$1';
+$route['admin/blog/new'] = 'blogAdmin/create';
+$route['admin/blog/edit'] = 'blogAdmin/get';
+$route['admin/blog/edit/(:any)'] = 'blogAdmin/edit/$1';
 
 $route['cron/update'] = 'cron/update';
 
