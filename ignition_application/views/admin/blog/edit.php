@@ -16,7 +16,7 @@
 		echo validation_errors(); 
 	}
 ?>
-<form action="/admin/blog/<?php echo $formType ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+<form action="<?php echo $postUrl ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 	<div class="form-group"> 
 	    <label for="title">Title</label>
 	    <input class="form-control" type="text" name="title" value="<?php echo $post->Title ?>">

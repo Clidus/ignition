@@ -104,7 +104,7 @@ class IG_BlogAdmin extends CI_Controller {
 		$this->load->model('Page');
 		$data = $this->Page->create("Edit \"" . $post->Title . "\"", "Admin");
 		$data['formSuccess'] = $this->form_validation->run();
-		$data['formType'] = "edit/" . $PostID;
+		$data['postUrl'] = "/admin/blog/edit/" . $PostID;
 		$data['post'] = $post;
 		
 		$this->load->view('templates/header', $data);
