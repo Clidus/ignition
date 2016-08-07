@@ -175,9 +175,9 @@ class IG_BlogAdmin extends CI_Controller {
 	private function uploadImage()
 	{
 		// configure file upload
-        $config['upload_path'] = './images/blog/';
-        $config['allowed_types'] = 'gif|jpg|jpeg|png';
-        $this->load->library('upload', $config);
+		$config['upload_path'] = './images/blog/';
+		$config['allowed_types'] = 'gif|jpg|jpeg|png';
+		$this->load->library('upload', $config);
 
 		// initialise return object
 		$result = new stdClass();
@@ -185,8 +185,8 @@ class IG_BlogAdmin extends CI_Controller {
         // upload file
         if ($this->upload->do_upload())
         {
-            // if successfull, return image file name
-            $uploadData = $this->upload->data();
+			// if successfull, return image file name
+			$uploadData = $this->upload->data();
 
 			$result->error = false;
 			$result->fileName = '/images/blog/' . $uploadData["file_name"];
