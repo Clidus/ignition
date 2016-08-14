@@ -7,7 +7,7 @@ CREATE TABLE `blog` (
   `URL` varchar(100) NOT NULL,
   `Post` text NOT NULL,
   `UserID` int(11) NOT NULL,
-  `Date` date NOT NULL,
+  `Date` datetime NOT NULL,
   `Deck` varchar(155) DEFAULT NULL,
   `Image` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`PostID`)
