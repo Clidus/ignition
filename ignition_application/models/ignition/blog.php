@@ -81,8 +81,12 @@ class IG_Blog extends CI_Model {
         $this->db->from('blog');
         $this->db->join('users', 'blog.UserID = users.UserID');
         $this->db->join('comments', 'comments.LinkID = blog.PostID AND comments.CommentTypeID = 1', 'left'); // 1 = Blog Comment
-        if(!$includeUnpublished) $this->db->where('Published', TRUE);
-        $this->db->where('TIMESTAMP(date,time) < ', $currentTimeInUTC->format('Y-m-d H:i:s')); 
+        
+        if(!$includeUnpublished) {
+            $this->db->where('Published', TRUE);
+            $this->db->where('TIMESTAMP(date,time) < ', $currentTimeInUTC->format('Y-m-d H:i:s')); 
+        }
+
         $this->db->group_by("PostID"); 
         $this->db->order_by("Date desc, Time desc"); 
         $this->db->limit($numberOfPosts);
