@@ -41,9 +41,7 @@
             </div>
             <input class="hidden" name="formType" value="post">
             <button type="submit" class="btn btn-default">Post</button>
-            <?php if($post->PostID > 0) { ?>
             <a onclick="javascript:deleteBlogPost(<?php echo $post->PostID ?>);"><div class="btn btn-danger pull-right">Delete</div></a>
-            <?php } ?>
         </form>
     </div>
     <div class="col-sm-4">
