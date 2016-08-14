@@ -37,6 +37,7 @@
                 <input class="form-control" type="text" name="image" value="<?php echo $post->Image ?>">
             </div>
             <div class="form-group"> 
+                <label for="url">Post</label>
                 <textarea id="blogPostTextArea" placeholder="Enter your text ..." class="form-control" name="post"><?php echo $post->Post ?></textarea>
             </div>
             <input class="hidden" name="formType" value="post">
