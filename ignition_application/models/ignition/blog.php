@@ -70,12 +70,13 @@ class IG_Blog extends CI_Model {
     }
 
     // get recent blog posts
-    function getPosts($numberOfPosts)
+    function getPosts($numberOfPosts, $includeUnpublished = false)
     {
         $this->db->select('blog.*, users.*, COUNT(comments.CommentID) AS Comments');
         $this->db->from('blog');
         $this->db->join('users', 'blog.UserID = users.UserID');
         $this->db->join('comments', 'comments.LinkID = blog.PostID AND comments.CommentTypeID = 1', 'left'); // 1 = Blog Comment
+        if(!$includeUnpublished) $this->db->where('Published', TRUE); 
         $this->db->group_by("PostID"); 
         $this->db->order_by("Date desc, PostID desc"); 
         $this->db->limit($numberOfPosts);
@@ -89,6 +90,7 @@ class IG_Blog extends CI_Model {
         $this->db->from('blog');
         $this->db->join('users', 'blog.UserID = users.UserID');
         $this->db->where('URL', $URL); 
+        $this->db->where('Published', TRUE); 
         $query = $this->db->get();
 
         if ($query->num_rows() == 1)
@@ -117,6 +119,7 @@ class IG_Blog extends CI_Model {
     {
         $this->db->select('YEAR(Date) AS Year, MONTH(Date) AS Month');
         $this->db->from('blog');
+        $this->db->where('Published', TRUE); 
         $this->db->group_by("YEAR(Date), MONTH(Date)"); 
         $this->db->order_by("YEAR(Date) desc, MONTH(Date) desc"); 
         return $this->db->get()->result();
@@ -129,6 +132,7 @@ class IG_Blog extends CI_Model {
         $this->db->from('blog');
         $this->db->where('YEAR(Date)', $year); 
         $this->db->where('MONTH(Date)', $month); 
+        $this->db->where('Published', TRUE); 
         $this->db->order_by("Date desc, PostID desc"); 
         return $this->db->get()->result();
     }
