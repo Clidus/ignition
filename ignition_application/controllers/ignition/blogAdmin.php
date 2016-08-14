@@ -26,10 +26,10 @@ class IG_BlogAdmin extends CI_Controller {
 
 		// get blog posts
 		$this->load->model('Blog');
-		$data['posts'] = $this->Blog->getPosts(100); // get 100 most recent posts
+		$data['posts'] = $this->Blog->getPosts(100, true); // get 100 most recent posts
 
 		$this->load->view('templates/header', $data);
-		$this->load->view('admin/blogPostList', $data);
+		$this->load->view('admin/blog/list', $data);
 		$this->load->view('templates/footer', $data);
 	}
 
@@ -90,6 +90,10 @@ class IG_BlogAdmin extends CI_Controller {
 			$this->form_validation->set_rules('title', 'Title', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('post', 'Post', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('deck', 'Deck', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('image', 'Image', 'trim|xss_clean');
+			$this->form_validation->set_rules('published', 'Published', 'trim|xss_clean');
+			$this->form_validation->set_rules('date', 'Date', 'trim|xss_clean');
+			$this->form_validation->set_rules('time', 'Time', 'trim|xss_clean');
 			$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '<a class="close" data-dismiss="alert" href="#">&times;</a></div>');
 
 			if ($this->form_validation->run())
@@ -97,33 +101,25 @@ class IG_BlogAdmin extends CI_Controller {
 				// update db
 				$this->load->model('Blog');
 				$title = $this->input->post('title');
-				$this->Blog->update($PostID, $title, $this->getUrl($title), $this->input->post('post'), $this->input->post('deck'));
+				$this->Blog->update($PostID, $title, $this->getUrl($title), $this->input->post('post'), $this->input->post('deck'), $this->input->post('image'), $this->input->post('published'), $this->input->post('date'), $this->input->post('time'));
 				$success = true;
 			}
 		} 
 		else if($this->input->post('formType') == "image")
 		{
-			$this->form_validation->set_rules('image', 'Image', 'trim|xss_clean');
+			// try to upload new image		
+			$imageUpload = $this->uploadImage();
 
-			if ($this->form_validation->run())
+			// check if upload succeeded
+			if(!$imageUpload->error)
 			{
-				// try to upload new image		
-				$imageUpload = $this->uploadImage();	
-
-				// check if upload succeeded
-				if(!$imageUpload->error)
-				{
-					// if no image was uploaded by user, use value in form		
-					if($imageUpload->fileName == null) $imageUpload->fileName = $this->input->post('image');
-
-					// update db
-					$this->load->model('Blog');
-					$this->Blog->updateImage($PostID, $imageUpload->fileName);
-					$success = true;
-				} else {
-					// return error
-					$errorMessage = $imageUpload->errorMessage;
-				}
+				// update db
+				$this->load->model('Blog');
+				$this->Blog->updateImage($PostID, $imageUpload->fileName);
+				$success = true;
+			} else {
+				// return error
+				$errorMessage = $imageUpload->errorMessage;
 			}
 		}
 		

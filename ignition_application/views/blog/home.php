@@ -21,7 +21,7 @@
 					</div>
 
 					<p class="postFooter">
-						Posted by <a href="/user/<?php echo $post->UserID; ?>"><?php echo $post->Username ?></a> on the <?php echo date_format(date_create($post->Date), 'jS F, Y') ?>. 
+						Posted by <a href="/user/<?php echo $post->UserID; ?>"><?php echo $post->Username ?></a> on the <?php echo date_format(date_create($post->Date . " " . $post->Time), 'jS F, Y g:ia') ?>. 
 						<span class="pull-right">
 							<a href="/blog/<?php echo $post->URL ?>#comments"><?php echo $post->CommentsLabel; ?></a>.
 						</span>

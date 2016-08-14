@@ -60,7 +60,11 @@ In the `ignition_application/config/` folder:
 * Set `base_url` and `encryption_key` in `config.php`
 * Set `hostname`, `username`, `password` and `database` in `database.php`
 
+### Upgrade:
+
+When upgrading between versions, follow the instructions in [migration.md](https://github.com/Clidus/ignition/blob/master/migration.md).
+
 ## License
 
-* Copyright 2015 [Joshua Marketis](http://www.clidus.com)
+* Copyright 2016 [Joshua Marketis](http://www.clidus.com)
 * Distributed under the [MIT License](http://creativecommons.org/licenses/MIT/)
