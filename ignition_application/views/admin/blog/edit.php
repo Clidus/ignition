@@ -33,12 +33,22 @@
                 <input class="form-control" type="text" name="deck" value="<?php echo $post->Deck ?>">
             </div>
             <div class="form-group"> 
-                <label for="url">Image</label>
+                <label for="image">Image</label>
                 <input class="form-control" type="text" name="image" value="<?php echo $post->Image ?>">
             </div>
             <div class="form-group"> 
-                <label for="url">Post</label>
+                <label for="post">Post</label>
                 <textarea id="blogPostTextArea" placeholder="Enter your text ..." class="form-control" name="post"><?php echo $post->Post ?></textarea>
+            </div>
+            <div class="form-group"> 
+                <label for="publish">Publish</label>
+                <?php 
+                    $options = array(
+                        '0'  => 'Draft',
+                        '1'  => 'Published',
+                    );
+                    echo form_dropdown('published', $options, $post->Published, 'class="form-control"');
+                ?>
             </div>
             <input class="hidden" name="formType" value="post">
             <button type="submit" class="btn btn-default">Post</button>
