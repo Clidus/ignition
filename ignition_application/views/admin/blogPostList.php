@@ -11,7 +11,14 @@
   {
 ?>
   <ul>
-    <li><a href="/admin/blog/edit/<?php echo $post->PostID ?>"><?php echo $post->Title ?></a></li>
+    <li>
+      <a href="/admin/blog/edit/<?php echo $post->PostID ?>">
+        <?php 
+          echo $post->Title;
+          if(!$post->Published) echo " (DRAFT)";
+        ?>
+      </a>
+    </li>
   </ul>
 <?php
   }
