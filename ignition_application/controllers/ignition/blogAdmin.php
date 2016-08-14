@@ -29,7 +29,7 @@ class IG_BlogAdmin extends CI_Controller {
 		$data['posts'] = $this->Blog->getPosts(100, true); // get 100 most recent posts
 
 		$this->load->view('templates/header', $data);
-		$this->load->view('admin/blogPostList', $data);
+		$this->load->view('admin/blog/list', $data);
 		$this->load->view('templates/footer', $data);
 	}
 
