@@ -33,6 +33,10 @@
                 <input class="form-control" type="text" name="deck" value="<?php echo $post->Deck ?>">
             </div>
             <div class="form-group"> 
+                <label for="url">Image</label>
+                <input class="form-control" type="text" name="image" value="<?php echo $post->Image ?>">
+            </div>
+            <div class="form-group"> 
                 <textarea id="blogPostTextArea" placeholder="Enter your text ..." class="form-control" name="post"><?php echo $post->Post ?></textarea>
             </div>
             <input class="hidden" name="formType" value="post">
@@ -45,8 +49,7 @@
     <div class="col-sm-4">
         <form action="/admin/blog/edit/<?php echo $postID ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
             <div class="form-group"> 
-                <label for="url">Image</label>
-                <input class="form-control" type="text" name="image" value="<?php echo $post->Image ?>">
+                <label for="url">Image Upload</label>
                 <input type="file" name="userfile" size="20" id="blogPostImageUpload" />
             </div>
             <input class="hidden" name="formType" value="image">
