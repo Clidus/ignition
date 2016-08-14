@@ -50,6 +50,14 @@
                     echo form_dropdown('published', $options, $post->Published, 'class="form-control"');
                 ?>
             </div>
+            <div class="form-group"> 
+                <label for="date">Publish Date</label>
+                <input class="form-control" type="date" name="date" value="<?php echo $post->Date ?>">
+            </div>
+            <div class="form-group"> 
+                <label for="time">Publish Time (UTC)</label>
+                <input class="form-control" type="time" name="time" value="<?php echo $post->Time ?>">
+            </div>
             <input class="hidden" name="formType" value="post">
             <button type="submit" class="btn btn-default">Post</button>
             <a onclick="javascript:deleteBlogPost(<?php echo $post->PostID ?>);"><div class="btn btn-danger pull-right">Delete</div></a>

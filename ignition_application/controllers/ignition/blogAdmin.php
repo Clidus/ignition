@@ -92,6 +92,8 @@ class IG_BlogAdmin extends CI_Controller {
 			$this->form_validation->set_rules('deck', 'Deck', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('image', 'Image', 'trim|xss_clean');
 			$this->form_validation->set_rules('published', 'Published', 'trim|xss_clean');
+			$this->form_validation->set_rules('date', 'Date', 'trim|xss_clean');
+			$this->form_validation->set_rules('time', 'Time', 'trim|xss_clean');
 			$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '<a class="close" data-dismiss="alert" href="#">&times;</a></div>');
 
 			if ($this->form_validation->run())
@@ -99,7 +101,7 @@ class IG_BlogAdmin extends CI_Controller {
 				// update db
 				$this->load->model('Blog');
 				$title = $this->input->post('title');
-				$this->Blog->update($PostID, $title, $this->getUrl($title), $this->input->post('post'), $this->input->post('deck'), $this->input->post('image'), $this->input->post('published'));
+				$this->Blog->update($PostID, $title, $this->getUrl($title), $this->input->post('post'), $this->input->post('deck'), $this->input->post('image'), $this->input->post('published'), $this->input->post('date'), $this->input->post('time'));
 				$success = true;
 			}
 		} 
