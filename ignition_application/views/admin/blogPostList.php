@@ -10,16 +10,20 @@
   foreach($posts as $post)
   {
 ?>
-  <ul>
-    <li>
-      <a href="/admin/blog/edit/<?php echo $post->PostID ?>">
-        <?php 
-          echo $post->Title;
-          if(!$post->Published) echo " (DRAFT)";
-        ?>
-      </a>
-    </li>
-  </ul>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <?php 
+            echo "<b>" . $post->Title . "</b>";
+            if(!$post->Published) echo " (DRAFT)";
+          ?>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <?php echo date_format(date_create($post->Date . " " . $post->Time), 'jS F, Y g:ia') ?>
+        <a class="btn btn-default pull-right" href="/admin/blog/edit/<?php echo $post->PostID ?>" role="button">Edit</a>
+      </div>
+    </div>
 <?php
   }
 ?>
