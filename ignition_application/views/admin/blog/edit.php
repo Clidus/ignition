@@ -65,6 +65,11 @@
         <form action="/admin/blog/edit/<?php echo $postID ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
             <div class="form-group"> 
                 <label for="url">Image Upload</label>
+                <?php 
+                    if($post->Image != null) {
+                        echo "<img src='" . $post->Image . "' id='blogPostImage' />";
+                    }
+                ?>
                 <input type="file" name="userfile" size="20" id="blogPostImageUpload" />
             </div>
             <input class="hidden" name="formType" value="image">
