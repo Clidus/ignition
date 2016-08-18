@@ -36,7 +36,7 @@
             </div>
             <div class="form-group"> 
                 <label for="post">Post</label>
-                <textarea id="blogPostTextArea" placeholder="Enter your text ..." class="form-control" name="post"><?php echo $post->Post ?></textarea>
+                <textarea data-provide="markdown" id="blogPostTextArea" placeholder="Enter your text ..." class="form-control" name="post"><?php echo $post->Post ?></textarea>
             </div>
             <div class="form-group"> 
                 <label for="publish">Publish</label>
