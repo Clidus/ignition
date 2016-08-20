@@ -57,8 +57,8 @@
                 <input class="form-control" type="time" name="time" value="<?php echo $post->Time ?>">
             </div>
             <input class="hidden" name="formType" value="post">
-            <button type="submit" class="btn btn-default">Post</button>
-            <a onclick="javascript:deleteBlogPost(<?php echo $post->PostID ?>);"><div class="btn btn-danger pull-right">Delete</div></a>
+            <a onclick="javascript:deleteBlogPost(<?php echo $post->PostID ?>);"><div class="btn btn-danger">Delete</div></a>
+            <button type="submit" class="btn btn-default pull-right">Save</button>
         </form>
     </div>
     <div class="col-sm-4">

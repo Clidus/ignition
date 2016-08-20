@@ -22,5 +22,6 @@
 		<label for="post">Post</label>
     	<textarea data-provide="markdown" id="blogPostTextArea" placeholder="Enter your text ..." class="form-control" name="post"><?php echo set_value('post'); ?></textarea>
     </div>
-    <button type="submit" class="btn btn-default">Save</button>
+    <button type="submit" class="btn btn-default pull-right">Save</button>
+    <p><i>This post will be saved as a draft.</i></p>
 </form>
