@@ -34,9 +34,21 @@
           <p><?php echo $post->Deck ?></p>
           <p><?php echo date_format(date_create($post->Date . " " . $post->Time), 'jS F, Y g:ia') ?></p>
         </div>
-        <a class="btn btn-default pull-right" href="/admin/blog/edit/<?php echo $post->PostID ?>" role="button">Edit Post</a>
+        <a class="btn btn-default pull-right" href="/admin/blog/edit/post/<?php echo $post->PostID ?>" role="button">Edit Post</a>
       </div>
     </div>
 <?php
-  }
+  }		
 ?>
+<ul class="pager">
+  <?php
+    $previousPage = $page - 1;
+    $nextPage = $page + 1;
+
+    if($previousPage > 0) 
+    {
+      echo "<li class='pull-left'><a href='/admin/blog/edit/" . $previousPage . "'>Previous</a></li>";
+    }
+    echo "<li class='pull-right'><a href='/admin/blog/edit/" . $nextPage . "'>Next</a></li>";
+  ?>
+</ul>

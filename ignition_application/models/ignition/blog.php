@@ -76,7 +76,7 @@ class IG_Blog extends CI_Model {
     }
 
     // get recent blog posts
-    function getPosts($numberOfPosts, $includeUnpublished = false)
+    function getPosts($resultsPerPage, $offset = 0, $includeUnpublished = false)
     {
         $currentTimeInUTC = $this->getCurrentTimeInUTC();
 
@@ -92,7 +92,7 @@ class IG_Blog extends CI_Model {
 
         $this->db->group_by("PostID"); 
         $this->db->order_by("Date desc, Time desc"); 
-        $this->db->limit($numberOfPosts);
+        $this->db->limit($resultsPerPage, $offset);
         return $this->db->get()->result();
     }
 

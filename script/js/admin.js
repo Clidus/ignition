@@ -11,7 +11,7 @@ function deleteBlogPost(ID) {
             if (data.error === true) {
                 showErrorModal(data.errorMessage,false,false);
             } else {
-                window.location = '/admin/blog/edit';
+                window.location = '/admin/blog/edit/1';
             }
         },
         error : function(XMLHttpRequest, textStatus, errorThrown) {

@@ -36,13 +36,13 @@
                 <p><?php echo $post->Deck ?></p>
                 <p><?php echo date_format(date_create($post->Date . " " . $post->Time), 'jS F, Y g:ia') ?></p>
                 </div>
-                <a class="btn btn-default pull-right" href="/admin/blog/edit/<?php echo $post->PostID ?>" role="button">Edit Post</a>
+                <a class="btn btn-default pull-right" href="/admin/blog/edit/post/<?php echo $post->PostID ?>" role="button">Edit Post</a>
             </div>
             </div>
         <?php
         }
         ?>
-        <a id="blogViewAllButton" class="btn btn-default btn-warning" href="/admin/blog/edit" role="button">View All</a>
+        <a id="blogViewAllButton" class="btn btn-default btn-warning" href="/admin/blog/edit/1" role="button">View All</a>
     </div>
     <div class="col-sm-6">
     </div>
