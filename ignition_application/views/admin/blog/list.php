@@ -6,11 +6,21 @@
 
 <h2><?php echo $pagetitle ?></h2>
 
+<div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><b>New Post</b></h3>
+    </div>
+    <div class="panel-body">
+      <p class="pull-left">Start a new blog post.</p>
+      <a class="btn btn-default btn-primary pull-right" href="/admin/blog/new" role="button">New Post</a>
+    </div>
+  </div>
+
 <?php
   foreach($posts as $post)
   {
 ?>
-    <div class="panel panel-default">
+    <div class="panel panel-<?php echo $post->Published ? 'primary' : 'warning' ?>">
       <div class="panel-heading">
         <h3 class="panel-title">
           <?php 
@@ -20,8 +30,11 @@
         </h3>
       </div>
       <div class="panel-body">
-        <?php echo date_format(date_create($post->Date . " " . $post->Time), 'jS F, Y g:ia') ?>
-        <a class="btn btn-default pull-right" href="/admin/blog/edit/<?php echo $post->PostID ?>" role="button">Edit</a>
+        <div class="pull-left">
+          <p><?php echo $post->Deck ?></p>
+          <p><?php echo date_format(date_create($post->Date . " " . $post->Time), 'jS F, Y g:ia') ?></p>
+        </div>
+        <a class="btn btn-default pull-right" href="/admin/blog/edit/<?php echo $post->PostID ?>" role="button">Edit Post</a>
       </div>
     </div>
 <?php
