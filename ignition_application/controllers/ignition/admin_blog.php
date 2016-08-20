@@ -25,8 +25,8 @@ class IG_Admin_Blog extends CI_Controller {
 		$data = $this->Page->create("Edit Blog Post", "Admin");
 
 		// get blog posts
-        $resultsPerPage = 10;
-        $offset = ($page-1) * $resultsPerPage;
+		$resultsPerPage = 10;
+		$offset = ($page-1) * $resultsPerPage;
 		$this->load->model('Blog');
 		$posts = $this->Blog->getPosts($resultsPerPage, $offset);
 
