@@ -11,7 +11,7 @@
 |
 */
 
-class IG_BlogAdmin extends CI_Controller {
+class IG_Admin_Blog extends CI_Controller {
 
 	// blog post list
 	public function get()
