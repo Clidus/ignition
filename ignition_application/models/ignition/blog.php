@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| Ignition v0.4.1 ignitionpowered.co.uk
+| Ignition v0.5.0 ignitionpowered.co.uk
 |--------------------------------------------------------------------------
 |
 | This class is a core part of Ignition. It is advised that you extend
@@ -22,13 +22,16 @@ class IG_Blog extends CI_Model {
     // add blog post
     function add($title, $url, $post, $userID, $deck)
     {
+        $currentTimeInUTC = $this->getCurrentTimeInUTC();
+
         $post = array(
             'Title' => $title,
             'URL' => $url,
+            'Deck' => $deck,
             'Post' => $post,
             'UserID' => $userID,
-            'Date' => date('Y-m-d H:i:s'),
-            'Deck' => $deck
+            'Date' => $currentTimeInUTC->format('Y-m-d'),
+            'Time' => $currentTimeInUTC->format('H:i:s'),
         );
 
         $this->db->insert('blog', $post); 
@@ -42,8 +45,8 @@ class IG_Blog extends CI_Model {
         $post = array(
             'Title' => $title,
             'URL' => $url,
-            'Post' => $post,
             'Deck' => $deck,
+            'Post' => $post,
             'Image' => $image,
             'Published' => $published,
             'Date' => $date,
@@ -73,7 +76,7 @@ class IG_Blog extends CI_Model {
     }
 
     // get recent blog posts
-    function getPosts($numberOfPosts, $includeUnpublished = false)
+    function getPosts($resultsPerPage, $offset = 0, $includeUnpublished = false)
     {
         $currentTimeInUTC = $this->getCurrentTimeInUTC();
 
@@ -89,7 +92,7 @@ class IG_Blog extends CI_Model {
 
         $this->db->group_by("PostID"); 
         $this->db->order_by("Date desc, Time desc"); 
-        $this->db->limit($numberOfPosts);
+        $this->db->limit($resultsPerPage, $offset);
         return $this->db->get()->result();
     }
 

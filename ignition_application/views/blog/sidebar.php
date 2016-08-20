@@ -1,7 +1,7 @@
 	<div class="col-sm-4">
 		<h2>Recent Posts</h2>
 		<?php
-			foreach($recentPosts as $post)
+			foreach($posts as $post)
 			{
 		?>
 				<p><a href="/blog/<?php echo $post->URL ?>"><?php echo $post->Title ?></a></p>

@@ -10,8 +10,8 @@
 |
 */
 
-require_once APPPATH.'/controllers/ignition/blogAdmin.php';
+require_once APPPATH.'/controllers/ignition/admin_blog.php';
 
-class BlogAdmin extends IG_BlogAdmin {
+class Admin_Blog extends IG_Admin_Blog {
 	
 }

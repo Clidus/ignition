@@ -6,7 +6,7 @@
 <div class="row">
 	<div class="col-sm-8">
 		<?php
-			foreach($recentPosts as $post)
+			foreach($posts as $post)
 			{
 		?>
 				<div class="blog-post">
@@ -31,5 +31,20 @@
 				<hr />
 		<?php
 			}
-		?>
+		?> 
+		<ul class="pager">
+			<?php
+				$previousPage = $page - 1;
+				$nextPage = $page + 1;
+
+				if($previousPage > 0) 
+				{
+					echo "<li class='pull-left'><a href='/blog/";
+					if($previousPage > 1) 
+						echo "page/" . $previousPage;
+					echo "'>Previous</a></li>";
+				}
+				echo "<li class='pull-right'><a href='/blog/page/" . $nextPage . "'>Next</a></li>";
+			?>
+		</ul>
 	</div>

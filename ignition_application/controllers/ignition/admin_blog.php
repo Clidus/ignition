@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| Ignition v0.4.1 ignitionpowered.co.uk
+| Ignition v0.5.0 ignitionpowered.co.uk
 |--------------------------------------------------------------------------
 |
 | This class is a core part of Ignition. It is advised that you extend
@@ -11,10 +11,10 @@
 |
 */
 
-class IG_BlogAdmin extends CI_Controller {
+class IG_Admin_Blog extends CI_Controller {
 
 	// blog post list
-	public function get()
+	public function get($page = 1)
 	{
 		// restricted page
 		if($this->session->userdata('Admin') != 1)
@@ -25,8 +25,17 @@ class IG_BlogAdmin extends CI_Controller {
 		$data = $this->Page->create("Edit Blog Post", "Admin");
 
 		// get blog posts
+		$resultsPerPage = 10;
+		$offset = ($page-1) * $resultsPerPage;
 		$this->load->model('Blog');
-		$data['posts'] = $this->Blog->getPosts(100, true); // get 100 most recent posts
+		$posts = $this->Blog->getPosts($resultsPerPage, $offset);
+
+		// return 404, if not blog homepage and no posts found
+		if($page != 1 && $posts == null)
+			show_404();
+
+		$data['posts'] = $posts;
+		$data['page'] = $page;
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('admin/blog/list', $data);
@@ -60,7 +69,7 @@ class IG_BlogAdmin extends CI_Controller {
 			$title = $this->input->post('title');
 			$postID = $this->Blog->add($title, $this->getUrl($title), $this->input->post('post'), $data['sessionUserID'], $this->input->post('deck'));
 
-			header("location: " . base_url() . "admin/blog/edit/" . $postID);
+			header("location: " . base_url() . "admin/blog/edit/post/" . $postID);
 		}
 
 		$this->load->view('templates/header', $data);

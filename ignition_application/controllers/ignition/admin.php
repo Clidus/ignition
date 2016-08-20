@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| Ignition v0.4.1 ignitionpowered.co.uk
+| Ignition v0.5.0 ignitionpowered.co.uk
 |--------------------------------------------------------------------------
 |
 | This class is a core part of Ignition. It is advised that you extend
@@ -23,6 +23,10 @@ class IG_Admin extends CI_Controller {
 		// page variables
 		$this->load->model('Page');
 		$data = $this->Page->create("Admin", "Admin");
+
+		// get blog posts
+		$this->load->model('Blog');
+		$data['posts'] = $this->Blog->getPosts(4, 0, true); // get 100 most recent posts
 
 		// load views
 		$this->load->view('templates/header', $data);
