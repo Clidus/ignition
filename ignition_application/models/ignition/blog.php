@@ -22,13 +22,16 @@ class IG_Blog extends CI_Model {
     // add blog post
     function add($title, $url, $post, $userID, $deck)
     {
+        $currentTimeInUTC = $this->getCurrentTimeInUTC();
+
         $post = array(
             'Title' => $title,
             'URL' => $url,
+            'Deck' => $deck,
             'Post' => $post,
             'UserID' => $userID,
-            'Date' => date('Y-m-d H:i:s'),
-            'Deck' => $deck
+            'Date' => $currentTimeInUTC->format('Y-m-d'),
+            'Time' => $currentTimeInUTC->format('H:i:s'),
         );
 
         $this->db->insert('blog', $post); 
@@ -42,8 +45,8 @@ class IG_Blog extends CI_Model {
         $post = array(
             'Title' => $title,
             'URL' => $url,
-            'Post' => $post,
             'Deck' => $deck,
+            'Post' => $post,
             'Image' => $image,
             'Published' => $published,
             'Date' => $date,
