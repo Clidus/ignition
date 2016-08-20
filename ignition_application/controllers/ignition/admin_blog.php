@@ -28,7 +28,7 @@ class IG_Admin_Blog extends CI_Controller {
 		$resultsPerPage = 10;
 		$offset = ($page-1) * $resultsPerPage;
 		$this->load->model('Blog');
-		$posts = $this->Blog->getPosts($resultsPerPage, $offset);
+		$posts = $this->Blog->getPosts($resultsPerPage, $offset, true);
 
 		// return 404, if not blog homepage and no posts found
 		if($page != 1 && $posts == null)
