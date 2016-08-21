@@ -16,14 +16,15 @@ gulp.task('scss', function () {
 });
 
 gulp.task('css', function () {
-    return gulp.src(['./style/css/bootstrap.min.css','./style/css/ignition.css'])
+    return gulp.src(['./style/css/bootstrap.min.css','./style/css/bootstrap-markdown.min.css','./style/css/ignition.css'])
         .pipe(concat('ignition.css'))
         .pipe(gulp.dest('./style/crushed'));
 });
 
 gulp.task('js', function () {
     return gulp.src(['./script/js/jquery-2.0.3.min.js','./script/js/jquery.autogrow-textarea.js','./script/js/bootstrap.min.js',
-        './script/js/admin.js','./script/js/comments.js','./script/js/global.js'])
+        './script/js/markdown.js','./script/js/bootstrap-markdown.js','./script/js/admin.js','./script/js/comments.js',
+        './script/js/global.js'])
         .pipe(uglify())
         .pipe(concat('ignition.js'))
         .pipe(gulp.dest('./script/crushed'))

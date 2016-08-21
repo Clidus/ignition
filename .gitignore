@@ -1,3 +1,4 @@
 *.scssc
-
+.vscode
 node_modules/
+images/blog
