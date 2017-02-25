@@ -11,7 +11,7 @@ CREATE TABLE `blog` (
   `Time` time NOT NULL,
   `Deck` varchar(155) DEFAULT NULL,
   `Image` varchar(100) DEFAULT NULL,
-  `Published` tinyint(1) NOT NULL DEFAULT '0'
+  `Published` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`PostID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
