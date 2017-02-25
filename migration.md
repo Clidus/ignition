@@ -16,3 +16,11 @@ All your existing posts will be unpublished. Run this to publish them.
 ```SQL
 UPDATE blog SET Published = TRUE
 ```
+
+### Upgrade from v0.5.0 to dev branch
+
+Add HTML field to blog table. 
+
+```SQL
+ALTER TABLE `blog` ADD `HTML` BOOLEAN NOT NULL DEFAULT FALSE AFTER `Published`;
+```

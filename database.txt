@@ -12,6 +12,7 @@ CREATE TABLE `blog` (
   `Deck` varchar(155) DEFAULT NULL,
   `Image` varchar(100) DEFAULT NULL,
   `Published` tinyint(1) NOT NULL DEFAULT '0',
+  `HTML` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`PostID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

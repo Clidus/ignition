@@ -93,7 +93,19 @@ class IG_Blog extends CI_Model {
         $this->db->group_by("PostID, Username"); 
         $this->db->order_by("Date desc, Time desc"); 
         $this->db->limit($resultsPerPage, $offset);
-        return $this->db->get()->result();
+        
+        $posts = $this->db->get()->result();
+        
+        foreach($posts as $post)
+        {
+            // convert HTML posts
+            if($post->HTML)
+            {
+                $post->Post = htmlspecialchars_decode($post->Post);
+            }
+        }
+
+        return $posts;
     }
 
     // get post by URL
@@ -110,9 +122,21 @@ class IG_Blog extends CI_Model {
         $query = $this->db->get();
 
         if ($query->num_rows() == 1)
-            return $query->first_row();
+        {
+            $post = $query->first_row();
+
+            // convert HTML posts
+            if($post->HTML)
+            {
+                $post->Post = htmlspecialchars_decode($post->Post);
+            }
+
+            return $post;
+        }
         else
+        {
             return null;
+        }
     }
 
     // get post by PostID
@@ -125,9 +149,21 @@ class IG_Blog extends CI_Model {
         $query = $this->db->get();
 
         if ($query->num_rows() == 1)
-            return $query->first_row();
+        {
+            $post = $query->first_row();
+
+            // convert HTML posts
+            if($post->HTML)
+            {
+                $post->Post = htmlspecialchars_decode($post->Post);
+            }
+
+            return $post;
+        }
         else
+        {
             return null;
+        }
     }
 
     // get blog post archive
