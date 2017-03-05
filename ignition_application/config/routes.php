@@ -47,6 +47,8 @@ $route['blog/archive'] = 'blogs/archive';
 $route['blog/archive/(:num)/(:num)'] = 'blogs/month/$1/$2';
 $route['blog/(:any)'] = 'blogs/post/$1';
 
+$route['feeds/blog'] = 'feeds/blog';
+
 $route['changelog'] = 'pages/view/changelog';
 
 $route['register'] = 'auth/register';

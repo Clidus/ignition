@@ -7,6 +7,12 @@
 $config['website_name'] = '';
 
 /* 
+	Website description
+	Example: A website foundation built on CodeIgniter 
+*/
+$config['website_description'] = '';
+
+/* 
 	Password reset email address 
 	Example: password@ignitionpowered.co.uk
 */

@@ -58,7 +58,7 @@ To rebuild the crushed javascript and css files used by Ignition, run *gulp* wit
 * Create a datebase with the schema in database.txt
 
 In the `ignition_application/config/` folder:
-* Set `website_name` and `email_password_reset` in `ignition_config.php`
+* Set `website_name`, `website_description` and `email_password_reset` in `ignition_config.php`
 * Set `base_url` and `encryption_key` in `config.php`
 * Set `hostname`, `username`, `password` and `database` in `database.php`
 
