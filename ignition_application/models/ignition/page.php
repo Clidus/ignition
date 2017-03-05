@@ -22,6 +22,7 @@ class IG_Page extends CI_Model {
     // create data for page view
     function create($pageTitle, $pageTemplate)
     {
+        $data['websiteName'] = $this->config->item('website_name');
         $data['pagetitle'] = $pageTitle;
         $data['pagetemplate'] = $pageTemplate;
         $data['sessionUserID'] = $this->session->userdata('UserID');

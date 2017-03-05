@@ -5,12 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <link rel="shortcut icon" href="images/favicon.png">
 
-        <title><?php echo $pagetitle ?> : Ignition</title>
+        <title><?php echo $pagetitle . ' : ' . $websiteName ?></title>
         
         <?php echo $metaTags ?>
 
         <!-- CSS -->
         <link href="/style/crushed/ignition.css" rel="stylesheet">
+        <link rel="alternate" type="application/rss+xml" title="RSS Feed for <?php echo $websiteName ?>" href="/feeds/blog" />
     </head>
     <body>
       <!-- navbar -->
